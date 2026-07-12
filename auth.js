@@ -38,6 +38,7 @@ window.submitMockLogin = function() {
     window.closeLoginModal();
     checkAuthSession();
 
+    // Route straight to dashboard on explicit creation confirm
     document.getElementById('homeScreen').classList.add('hidden');
     document.getElementById('mainDashboard').classList.remove('hidden');
 };
@@ -52,12 +53,21 @@ window.handleLogout = function() {
 
 function checkAuthSession() {
     const savedSession = localStorage.getItem('universe_user');
-    const userObject = savedSession ? JSON.parse(savedSession) : null;
+    
+    // Strict JSON parsing check block to fix the fake persistence profile bug
+    let userObject = null;
+    try {
+        if (savedSession) {
+            userObject = JSON.parse(savedSession);
+        }
+    } catch(e) {
+        localStorage.removeItem('universe_user');
+        userObject = null;
+    }
     
     if (typeof window.onAccountStateChanged === "function") {
         window.onAccountStateChanged(userObject);
     }
 }
 
-// Run checks immediately upon DOM tree assembly
 window.addEventListener('DOMContentLoaded', checkAuthSession);
