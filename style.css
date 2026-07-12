@@ -1,6 +1,6 @@
 :root {
-    --bg-color: #0b0f19;
-    --panel-bg: #1e293b;
+    --bg-color: #05070f;
+    --panel-bg: rgba(30, 41, 59, 0.75);
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --accent: #38bdf8;
@@ -11,8 +11,15 @@
 
 body {
     font-family: system-ui, -apple-system, sans-serif;
+    /* 🌌 Beautiful, multi-layered pure CSS starry space background */
     background-color: var(--bg-color);
-    color: var(--text-main);
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -21,7 +28,7 @@ body {
     position: relative;
 }
 
-/* 🌀 Space Tornado Layer - Significantly slowed rotation speed */
+/* 🌀 Space Tornado Layer - Fine-tuned to a smooth, lively, non-dizzying speed */
 .vortex-container {
     position: absolute;
     top: 0;
@@ -49,11 +56,11 @@ body {
         transform: translate3d(-50%, -50%, -600px) rotate(0deg) translateX(0px);
         opacity: 0;
     }
-    15% { opacity: 0.4; }
-    85% { opacity: 0.4; }
+    15% { opacity: 0.6; }
+    85% { opacity: 0.6; }
     100% {
-        /* Dropped rotational speed from 720deg down to a relaxed 180deg */
-        transform: translate3d(-50%, -50%, 200px) rotate(180deg) translateX(var(--orbit-radius)) rotateY(45deg);
+        /* Set to a smooth, single complete rotation loop so it doesn't cause dizziness */
+        transform: translate3d(-50%, -50%, 200px) rotate(360deg) translateX(var(--orbit-radius)) rotateY(90deg);
         opacity: 0;
     }
 }
@@ -76,7 +83,7 @@ body {
 }
 
 .nav-brand-btn {
-    background: rgba(30, 41, 59, 0.6);
+    background: rgba(15, 23, 42, 0.6);
     color: var(--text-muted);
     border: 1px solid var(--border-thin);
     padding: 0.5rem 1.2rem;
@@ -92,7 +99,6 @@ body {
     background: rgba(56, 189, 248, 0.1);
 }
 
-/* Custom Profile Tags */
 .nav-profile-name {
     color: var(--success);
     font-weight: 500;
@@ -106,7 +112,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(11, 15, 25, 0.85);
+    background-color: rgba(5, 7, 15, 0.85);
     backdrop-filter: blur(6px);
     z-index: 100;
     display: flex;
@@ -115,7 +121,7 @@ body {
 }
 
 .modal-box {
-    background-color: var(--panel-bg);
+    background-color: #1e293b;
     border: var(--border-thick);
     padding: 2.5rem;
     max-width: 420px;
@@ -206,7 +212,7 @@ body {
     text-align: center;
     margin-bottom: 1.5rem;
     max-width: 80%;
-    background-color: rgba(11, 15, 25, 0.8);
+    background-color: rgba(5, 7, 15, 0.75);
     backdrop-filter: blur(4px);
 }
 
@@ -220,7 +226,7 @@ body {
 .btn-group { display: flex; gap: 1rem; }
 
 .action-btn {
-    background: rgba(11, 15, 25, 0.9);
+    background: rgba(5, 7, 15, 0.85);
     color: var(--text-main);
     border: var(--border-thick);
     padding: 0.8rem 2.5rem;
@@ -256,7 +262,7 @@ body {
 }
 
 .panel {
-    background-color: rgba(30, 41, 59, 0.8);
+    background-color: var(--panel-bg);
     backdrop-filter: blur(8px);
     border: var(--border-thin);
     border-radius: 12px;
