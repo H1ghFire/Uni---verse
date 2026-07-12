@@ -18,37 +18,33 @@ function showHomeScreen() {
     document.getElementById('mainDashboard').classList.add('hidden');
 }
 
-function navigateToProfile() {
-    if(!activeUser) {
-        alert("Please Sign up / Login first to access your profile dashboard!");
-    } else {
-        document.getElementById('homeScreen').classList.add('hidden');
-        document.getElementById('mainDashboard').classList.remove('hidden');
+function navigateToDashboard() {
+    if (!activeUser) {
+        alert("Please Sign up / Login first to access your custom score dashboard!");
+        return;
     }
+    document.getElementById('homeScreen').classList.add('hidden');
+    document.getElementById('mainDashboard').classList.remove('hidden');
 }
 
-// Global Core UI Synchronizer
+// Global UI Account Synchronization Engine
 function onAccountStateChanged(user) {
     activeUser = user;
-    const profileLink = document.getElementById('profileLink');
     const mainLoginBtn = document.getElementById('mainLoginBtn');
     const authNavContainer = document.getElementById('authNavContainer');
 
     if (user) {
         if (mainLoginBtn) {
             mainLoginBtn.innerText = "Enter Dashboard";
-            mainLoginBtn.onclick = () => {
-                document.getElementById('homeScreen').classList.add('hidden');
-                document.getElementById('mainDashboard').classList.remove('hidden');
-            };
+            mainLoginBtn.onclick = () => navigateToDashboard();
         }
         
         if (authNavContainer) {
             authNavContainer.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span style="font-size: 1.2rem;">${user.avatar}</span>
-                    <a href="#" id="profileLink" style="color: var(--success); text-decoration: none;" onclick="navigateToProfile()">${user.name}</a>
-                    <button onclick="handleLogout()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.8rem; margin-left: 0.5rem; text-decoration: underline;">Logout</button>
+                    <span class="nav-profile-name">${user.name}</span>
+                    <button onclick="handleLogout()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.85rem; margin-left: 0.5rem; text-decoration: underline;">Logout</button>
                 </div>
             `;
         }
@@ -62,7 +58,7 @@ function onAccountStateChanged(user) {
             };
         }
         if (authNavContainer) {
-            authNavContainer.innerHTML = `<a href="#" id="profileLink" onclick="navigateToProfile()">Profile</a>`;
+            authNavContainer.innerHTML = `<span style="color: var(--text-muted); font-size: 0.9rem;">Not Logged In</span>`;
         }
     }
 }
@@ -94,7 +90,7 @@ function filterUniversities() {
     });
 
     if (filtered.length === 0) {
-        resultsContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No matches found. Try boosting individual scores or changing destinations!</p>`;
+        resultsContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No matches found. Try modifying your input scores!</p>`;
         return;
     }
 
@@ -106,7 +102,7 @@ function filterUniversities() {
         card.innerHTML = `
             <div class="uni-name">${uni.name}</div>
             <div class="uni-country">${uni.country}</div>
-            <div class="req-tag"><span>Min SAT Sections:</span> <span class="req-val">${satDisplay}</span></div>
+            <div class="req-tag"><span>Min SAT:</span> <span class="req-val">${satDisplay}</span></div>
             <div class="req-tag"><span>Min IELTS:</span> <span class="req-val">${uni.minIelts}</span></div>
             <div class="req-tag"><span>Est. Tuition:</span> <span class="req-val" style="color: #4ade80;">${uni.fee}</span></div>
         `;
@@ -114,21 +110,23 @@ function filterUniversities() {
     });
 }
 
+// Generates the floating environment background assets
 function createCosmicVortex() {
     const container = document.getElementById('vortexContainer');
     if (!container) return;
 
     const items = ['📚', '📘', '📙', '✨', '🪐', '📖'];
-    const totalElements = 35; 
+    const totalElements = 25; // Slightly reduced element volume to clear visual layout clutter
 
     for (let i = 0; i < totalElements; i++) {
         const element = document.createElement('div');
         element.className = 'vortex-item';
         element.innerText = items[Math.floor(Math.random() * items.length)];
 
-        const duration = 14 + Math.random() * 16; 
-        const delay = Math.random() * -30; 
-        const radius = 200 + Math.random() * 450; 
+        // Drastically increased execution timing variables (35s-65s) to cause slow drift speeds
+        const duration = 35 + Math.random() * 30; 
+        const delay = Math.random() * -60; 
+        const radius = 150 + Math.random() * 400; 
 
         element.style.setProperty('--orbit-radius', `${radius}px`);
         element.style.animationDuration = `${duration}s`;
