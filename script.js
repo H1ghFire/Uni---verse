@@ -1,4 +1,5 @@
-// 1. Mock Database Layout Engine
+let activeUser = null;
+
 const universities = [
     { name: "Stanford University", country: "USA", minEbrw: 720, minMath: 750, minIelts: 7.0, fee: "$62,000" },
     { name: "Penn State University", country: "USA", minEbrw: 580, minMath: 620, minIelts: 6.5, fee: "$39,000" },
@@ -12,27 +13,61 @@ function showAboutUs() {
     alert("Welcome to the Uni-verse! A global platform to explore universities, track detailed SAT/IELTS score milestones, and join an international student community.");
 }
 
+function showHomeScreen() {
+    document.getElementById('homeScreen').classList.remove('hidden');
+    document.getElementById('mainDashboard').classList.add('hidden');
+}
+
 function navigateToProfile() {
-    alert("Please Sign up / Login first to access your profile dashboard!");
+    if(!activeUser) {
+        alert("Please Sign up / Login first to access your profile dashboard!");
+    } else {
+        document.getElementById('homeScreen').classList.add('hidden');
+        document.getElementById('mainDashboard').classList.remove('hidden');
+    }
 }
 
-// 2. Sync UI labels and calculate total SAT dynamically
+// Triggers when our local auth script verifies a login profile
+function onAccountStateChanged(user) {
+    activeUser = user;
+    const profileLink = document.getElementById('profileLink');
+    const mainLoginBtn = document.getElementById('mainLoginBtn');
+    const authNavContainer = document.getElementById('authNavContainer');
+
+    if (user) {
+        mainLoginBtn.innerText = "Enter Dashboard";
+        mainLoginBtn.onclick = () => {
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('mainDashboard').classList.remove('hidden');
+        };
+        
+        authNavContainer.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.2rem;">${user.avatar}</span>
+                <a href="#" id="profileLink" style="color: var(--success); text-decoration: none;" onclick="navigateToProfile()">${user.name}</a>
+                <button onclick="handleLogout()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.8rem; margin-left: 0.5rem; text-decoration: underline;">Logout</button>
+            </div>
+        `;
+    } else {
+        mainLoginBtn.innerText = "Sign up / Login";
+        mainLoginBtn.onclick = () => openLoginModal();
+        authNavContainer.innerHTML = `<a href="#" id="profileLink" onclick="navigateToProfile()">Profile</a>`;
+    }
+}
+
 function updateValues() {
-    const ebrw = parseInt(document.getElementById('satEbrwFilter').value);
-    const math = parseInt(document.getElementById('satMathFilter').value);
-    
-    document.getElementById('satEbrwVal').innerText = ebrw;
-    document.getElementById('satMathVal').innerText = math;
+    const ebrwInput = document.getElementById('satEbrwFilter');
+    const mathInput = document.getElementById('satMathFilter');
+    let ebrw = parseInt(ebrwInput.value) || 0;
+    let math = parseInt(mathInput.value) || 0;
     document.getElementById('satTotalVal').innerText = ebrw + math;
-    document.getElementById('ieltsVal').innerText = document.getElementById('ieltsFilter').value;
 }
 
-// 3. Main Filtering Engine
 function filterUniversities() {
     const selectedCountry = document.getElementById('countryFilter').value;
-    const userEbrw = parseInt(document.getElementById('satEbrwFilter').value);
-    const userMath = parseInt(document.getElementById('satMathFilter').value);
-    const userIelts = parseFloat(document.getElementById('ieltsFilter').value);
+    const userEbrw = parseInt(document.getElementById('satEbrwFilter').value) || 0;
+    const userMath = parseInt(document.getElementById('satMathFilter').value) || 0;
+    const userIelts = parseFloat(document.getElementById('ieltsFilter').value) || 0;
     
     const resultsContainer = document.getElementById('results');
     if (!resultsContainer) return;
@@ -47,7 +82,7 @@ function filterUniversities() {
     });
 
     if (filtered.length === 0) {
-        resultsContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No matches found. Try boosting individual scores or changing destination filters!</p>`;
+        resultsContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No matches found. Try boosting individual scores or changing destinations!</p>`;
         return;
     }
 
@@ -67,22 +102,21 @@ function filterUniversities() {
     });
 }
 
-// 🌀 Cosmic Tornado Engine Execution
 function createCosmicVortex() {
     const container = document.getElementById('vortexContainer');
     if (!container) return;
 
     const items = ['📚', '📘', '📙', '✨', '🪐', '📖'];
-    const totalElements = 45; 
+    const totalElements = 35; 
 
     for (let i = 0; i < totalElements; i++) {
         const element = document.createElement('div');
         element.className = 'vortex-item';
         element.innerText = items[Math.floor(Math.random() * items.length)];
 
-        const duration = 6 + Math.random() * 8; 
-        const delay = Math.random() * -15; 
-        const radius = 220 + Math.random() * 450; 
+        const duration = 14 + Math.random() * 16; 
+        const delay = Math.random() * -30; 
+        const radius = 200 + Math.random() * 450; 
 
         element.style.setProperty('--orbit-radius', `${radius}px`);
         element.style.animationDuration = `${duration}s`;
@@ -92,7 +126,6 @@ function createCosmicVortex() {
     }
 }
 
-// Run on application initialization
 window.addEventListener('DOMContentLoaded', () => {
     createCosmicVortex();
     updateValues();
