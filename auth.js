@@ -2,16 +2,16 @@
 
 let selectedAvatarEmoji = "🚀";
 
-// Open/Close modal popup controllers
 window.openLoginModal = function() {
-    document.getElementById('loginModal').classList.remove('hidden');
+    const modal = document.getElementById('loginModal');
+    if (modal) modal.classList.remove('hidden');
 };
 
 window.closeLoginModal = function() {
-    document.getElementById('loginModal').classList.add('hidden');
+    const modal = document.getElementById('loginModal');
+    if (modal) modal.classList.add('hidden');
 };
 
-// Avatar picking toggle engine
 window.selectAvatar = function(element) {
     const options = document.querySelectorAll('.avatar-option');
     options.forEach(opt => opt.classList.remove('selected'));
@@ -20,7 +20,6 @@ window.selectAvatar = function(element) {
     selectedAvatarEmoji = element.innerText;
 };
 
-// Form verification system
 window.submitMockLogin = function() {
     const nameInput = document.getElementById('usernameInput').value.trim();
     
@@ -34,13 +33,11 @@ window.submitMockLogin = function() {
         avatar: selectedAvatarEmoji
     };
 
-    // Save profile to browser memory cache configuration
     localStorage.setItem('universe_user', JSON.stringify(localUser));
     
-    closeLoginModal();
+    window.closeLoginModal();
     checkAuthSession();
 
-    // Instantly transition into dashboard view on confirmation
     document.getElementById('homeScreen').classList.add('hidden');
     document.getElementById('mainDashboard').classList.remove('hidden');
 };
@@ -48,7 +45,9 @@ window.submitMockLogin = function() {
 window.handleLogout = function() {
     localStorage.removeItem('universe_user');
     checkAuthSession();
-    window.showHomeScreen();
+    if (typeof window.showHomeScreen === "function") {
+        window.showHomeScreen();
+    }
 };
 
 function checkAuthSession() {
@@ -60,5 +59,5 @@ function checkAuthSession() {
     }
 }
 
-// Auto check for active profile sessions on initialization boot
+// Run checks immediately upon DOM tree assembly
 window.addEventListener('DOMContentLoaded', checkAuthSession);
