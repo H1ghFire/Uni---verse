@@ -21,7 +21,7 @@ body {
     position: relative;
 }
 
-/* 🌀 Space Tornado Layer (Maintained Slower Spin Rate) */
+/* 🌀 Space Tornado Layer - Significantly slowed rotation speed */
 .vortex-container {
     position: absolute;
     top: 0;
@@ -37,7 +37,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     user-select: none;
     transform-style: preserve-3d;
     opacity: 0;
@@ -49,10 +49,11 @@ body {
         transform: translate3d(-50%, -50%, -600px) rotate(0deg) translateX(0px);
         opacity: 0;
     }
-    10% { opacity: 0.6; }
-    90% { opacity: 0.6; }
+    15% { opacity: 0.4; }
+    85% { opacity: 0.4; }
     100% {
-        transform: translate3d(-50%, -50%, 200px) rotate(720deg) translateX(var(--orbit-radius)) rotateY(180deg);
+        /* Dropped rotational speed from 720deg down to a relaxed 180deg */
+        transform: translate3d(-50%, -50%, 200px) rotate(180deg) translateX(var(--orbit-radius)) rotateY(45deg);
         opacity: 0;
     }
 }
@@ -69,29 +70,34 @@ body {
     z-index: 10;
 }
 
+.nav-left {
+    display: flex;
+    gap: 0.75rem;
+}
+
 .nav-brand-btn {
-    background: transparent;
+    background: rgba(30, 41, 59, 0.6);
     color: var(--text-muted);
     border: 1px solid var(--border-thin);
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1.2rem;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 500;
-    transition: all 0.2s;
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
 }
 .nav-brand-btn:hover {
     color: var(--text-main);
     border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.1);
 }
 
-#profileLink {
-    color: var(--text-main);
-    text-decoration: none;
-    font-size: 1.1rem;
+/* Custom Profile Tags */
+.nav-profile-name {
+    color: var(--success);
     font-weight: 500;
-    transition: color 0.2s;
+    font-size: 1rem;
 }
-#profileLink:hover { color: var(--accent); }
 
 /* 🎫 CUSTOM SYSTEM LOG-IN MODAL POPUP BACKDROP WINDOWS */
 .modal-overlay {
