@@ -113,7 +113,7 @@ function createCosmicVortex() {
     if (!container) return;
 
     const items = ['📚', '📘', '📙', '✨', '🪐', '📖'];
-    const totalElements = 30; 
+    const totalElements = 45; 
 
     for (let i = 0; i < totalElements; i++) {
         const element = document.createElement('div');
