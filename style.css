@@ -9,16 +9,27 @@
     --success: #4ade80;
 }
 
+:root {
+    --bg-color: #05070f;
+    --panel-bg: rgba(30, 41, 59, 0.75);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #38bdf8;
+    --border-thick: 4px solid #ffffff;
+    --border-thin: 1px solid #334155;
+    --success: #4ade80;
+}
+
 body {
     font-family: system-ui, -apple-system, sans-serif;
-    /* 🌌 Beautiful, multi-layered pure CSS starry space background */
     background-color: var(--bg-color);
-    background-image: 
-        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
-    background-size: 550px 550px, 350px 350px, 250px 250px;
-    background-position: 0 0, 40px 60px, 130px 270px;
+    
+    /* 🌌 Using your exact starfield image file name */
+    background-image: url('eso1035b.jpg');
+    background-size: cover;          /* Scales the photo to fill the whole screen beautifully */
+    background-position: center;     /* Centers the star cluster perfectly */
+    background-attachment: fixed;   /* Keeps the background steady while scrolling filters */
+    background-repeat: no-repeat;
     
     margin: 0;
     min-height: 100vh;
