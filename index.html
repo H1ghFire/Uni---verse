@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uni-verse</title>
+    <!-- 🔗 Linking our separate stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Top Navigation Header containing the Profile link -->
+    <!-- 🌌 Dynamic Space Tornado Background Layer -->
+    <div id="vortexContainer" class="vortex-container"></div>
+
+    <!-- Top Navigation Header -->
     <header class="main-header">
         <div class="nav-right">
             <a href="#" id="profileLink" onclick="navigateToProfile()">Profile</a>
         </div>
     </header>
 
-    <!-- 🌌 LANDING HOME SCREEN -->
+    <!-- 🪐 SCREEN 1: LANDING HOME SCREEN -->
     <div id="homeScreen" class="welcome-container">
-        
-        <!-- Large Hero Welcome Box -->
+        <!-- Large Hero Welcome Box from your drawing -->
         <div class="hero-box">
             <h1>Welcome to the universe</h1>
         </div>
@@ -28,10 +31,68 @@
             <button class="action-btn" onclick="handleLogin()">Sign up / Login</button>
             <button class="action-btn secondary" onclick="showAboutUs()">About us</button>
         </div>
-
     </div>
 
-    <!-- Scripts -->
+    <!-- 🖥️ SCREEN 2: MAIN APPLICATION DASHBOARD (Hidden on startup) -->
+    <div id="mainDashboard" class="dashboard-container hidden">
+        <div class="dashboard-grid">
+            
+            <!-- Left Side: Filter Control Panel -->
+            <section class="panel search-panel">
+                <h2>Filters</h2>
+                
+                <div class="filter-group">
+                    <label for="countryFilter">Target Destination</label>
+                    <select id="countryFilter" onchange="filterUniversities()">
+                        <option value="all">Anywhere (Global)</option>
+                        <option value="USA">United States</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="Germany">Germany</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <div class="slider-header">
+                        <label for="satEbrwFilter">SAT Reading & Writing</label>
+                        <span id="satEbrwVal" class="value-display">600</span>
+                    </div>
+                    <input type="range" id="satEbrwFilter" min="200" max="800" step="10" value="600" oninput="updateValues(); filterUniversities();">
+                </div>
+
+                <div class="filter-group">
+                    <div class="slider-header">
+                        <label for="satMathFilter">SAT Math</label>
+                        <span id="satMathVal" class="value-display">600</span>
+                    </div>
+                    <input type="range" id="satMathFilter" min="200" max="800" step="10" value="600" oninput="updateValues(); filterUniversities();">
+                </div>
+
+                <div class="filter-group">
+                    <label>Calculated Total SAT</label>
+                    <div class="total-display-box">
+                        <span id="satTotalVal">1200</span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="slider-header">
+                        <label for="ieltsFilter">Your IELTS Band</label>
+                        <span id="ieltsVal" class="value-display">6.0</span>
+                    </div>
+                    <input type="range" id="ieltsFilter" min="4.0" max="9.0" step="0.5" value="6.0" oninput="updateValues(); filterUniversities();">
+                </div>
+            </section>
+
+            <!-- Right Side: Matching Matrix Container -->
+            <section class="panel display-panel">
+                <h2>Matching Universities</h2>
+                <div class="results-grid" id="results"></div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- 🔗 Linking our separate JavaScript layers -->
     <script src="auth.js"></script>
     <script src="script.js"></script>
 </body>
