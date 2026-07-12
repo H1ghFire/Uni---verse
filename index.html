@@ -3,67 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniMatch - Global University Finder</title>
-    
-    <!-- 🔗 Connects your separate style sheet -->
+    <title>Uni-verse</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>UniMatch</h1>
-        <p>Granular SAT sections tracking. Instant validation.</p>
+    <!-- Top Navigation Header containing the Profile link -->
+    <header class="main-header">
+        <div class="nav-right">
+            <a href="#" id="profileLink" onclick="navigateToProfile()">Profile</a>
+        </div>
     </header>
 
-    <div class="search-panel">
-        <div class="filter-group">
-            <label for="countryFilter">Target Destination</label>
-            <select id="countryFilter" onchange="filterUniversities()">
-                <option value="all">Anywhere (Global)</option>
-                <option value="USA">United States</option>
-                <option value="Netherlands">Netherlands</option>
-                <option value="Germany">Germany</option>
-            </select>
+    <!-- 🌌 LANDING HOME SCREEN -->
+    <div id="homeScreen" class="welcome-container">
+        
+        <!-- Large Hero Welcome Box -->
+        <div class="hero-box">
+            <h1>Welcome to the universe</h1>
         </div>
 
-        <div class="filter-group">
-            <div style="display: flex; justify-content: space-between;">
-                <label for="satEbrwFilter">SAT Reading & Writing</label>
-                <span id="satEbrwVal" class="value-display">600</span>
-            </div>
-            <input type="range" id="satEbrwFilter" min="200" max="800" step="10" value="600" oninput="updateValues(); filterUniversities();">
+        <!-- Action Buttons Row -->
+        <div class="btn-group">
+            <button class="action-btn" onclick="handleLogin()">Sign up / Login</button>
+            <button class="action-btn secondary" onclick="showAboutUs()">About us</button>
         </div>
 
-        <div class="filter-group">
-            <div style="display: flex; justify-content: space-between;">
-                <label for="satMathFilter">SAT Math</label>
-                <span id="satMathVal" class="value-display">600</span>
-            </div>
-            <input type="range" id="satMathFilter" min="200" max="800" step="10" value="600" oninput="updateValues(); filterUniversities();">
-        </div>
-
-        <div class="filter-group">
-            <label>Calculated Total SAT</label>
-            <div class="total-display-box">
-                <span id="satTotalVal" style="font-weight: bold; color: #4ade80; font-size: 1.1rem;">1200</span>
-            </div>
-        </div>
-
-        <div class="filter-group">
-            <div style="display: flex; justify-content: space-between;">
-                <label for="ieltsFilter">Your IELTS Band</label>
-                <span id="ieltsVal" class="value-display">6.0</span>
-            </div>
-            <input type="range" id="ieltsFilter" min="4.0" max="9.0" step="0.5" value="6.0" oninput="updateValues(); filterUniversities();">
-        </div>
     </div>
 
-    <div class="results-grid" id="results"></div>
-</div>
-
-<!-- 🔗 Connects your separate script engine -->
-<script src="script.js"></script>
-
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
