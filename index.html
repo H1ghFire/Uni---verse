@@ -37,10 +37,11 @@
     <!-- Top Navigation Header -->
     <header class="main-header">
         <div class="nav-left">
-            <button id="navHomeBtn" class="nav-brand-btn" onclick="showHomeScreen()">← Main Page</button>
+            <button id="navHomeBtn" class="nav-brand-btn" onclick="showHomeScreen()">Home Screen</button>
+            <button id="navDashboardBtn" class="nav-brand-btn" onclick="navigateToDashboard()">Dashboard</button>
         </div>
         <div class="nav-right" id="authNavContainer">
-            <a href="#" id="profileLink" onclick="navigateToProfile()">Profile</a>
+            <!-- Dynamically populated by auth.js -->
         </div>
     </header>
 
@@ -108,7 +109,7 @@
         </div>
     </div>
 
-    <!-- 🔗 Restored our fast, standard layout scripting linkages -->
+    <!-- Scripts -->
     <script src="auth.js"></script>
     <script src="script.js"></script>
 </body>
