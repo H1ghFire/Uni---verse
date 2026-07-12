@@ -27,7 +27,7 @@ function navigateToProfile() {
     }
 }
 
-// Triggers when our local auth script verifies a login profile
+// Global Core UI Synchronizer
 function onAccountStateChanged(user) {
     activeUser = user;
     const profileLink = document.getElementById('profileLink');
@@ -35,23 +35,35 @@ function onAccountStateChanged(user) {
     const authNavContainer = document.getElementById('authNavContainer');
 
     if (user) {
-        mainLoginBtn.innerText = "Enter Dashboard";
-        mainLoginBtn.onclick = () => {
-            document.getElementById('homeScreen').classList.add('hidden');
-            document.getElementById('mainDashboard').classList.remove('hidden');
-        };
+        if (mainLoginBtn) {
+            mainLoginBtn.innerText = "Enter Dashboard";
+            mainLoginBtn.onclick = () => {
+                document.getElementById('homeScreen').classList.add('hidden');
+                document.getElementById('mainDashboard').classList.remove('hidden');
+            };
+        }
         
-        authNavContainer.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="font-size: 1.2rem;">${user.avatar}</span>
-                <a href="#" id="profileLink" style="color: var(--success); text-decoration: none;" onclick="navigateToProfile()">${user.name}</a>
-                <button onclick="handleLogout()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.8rem; margin-left: 0.5rem; text-decoration: underline;">Logout</button>
-            </div>
-        `;
+        if (authNavContainer) {
+            authNavContainer.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 1.2rem;">${user.avatar}</span>
+                    <a href="#" id="profileLink" style="color: var(--success); text-decoration: none;" onclick="navigateToProfile()">${user.name}</a>
+                    <button onclick="handleLogout()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.8rem; margin-left: 0.5rem; text-decoration: underline;">Logout</button>
+                </div>
+            `;
+        }
     } else {
-        mainLoginBtn.innerText = "Sign up / Login";
-        mainLoginBtn.onclick = () => openLoginModal();
-        authNavContainer.innerHTML = `<a href="#" id="profileLink" onclick="navigateToProfile()">Profile</a>`;
+        if (mainLoginBtn) {
+            mainLoginBtn.innerText = "Sign up / Login";
+            mainLoginBtn.onclick = () => {
+                if (typeof window.openLoginModal === "function") {
+                    window.openLoginModal();
+                }
+            };
+        }
+        if (authNavContainer) {
+            authNavContainer.innerHTML = `<a href="#" id="profileLink" onclick="navigateToProfile()">Profile</a>`;
+        }
     }
 }
 
