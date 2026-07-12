@@ -27,7 +27,6 @@ function navigateToDashboard() {
     document.getElementById('mainDashboard').classList.remove('hidden');
 }
 
-// Global UI Account Synchronization Engine
 function onAccountStateChanged(user) {
     activeUser = user;
     const mainLoginBtn = document.getElementById('mainLoginBtn');
@@ -38,7 +37,6 @@ function onAccountStateChanged(user) {
             mainLoginBtn.innerText = "Enter Dashboard";
             mainLoginBtn.onclick = () => navigateToDashboard();
         }
-        
         if (authNavContainer) {
             authNavContainer.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -110,23 +108,22 @@ function filterUniversities() {
     });
 }
 
-// Generates the floating environment background assets
 function createCosmicVortex() {
     const container = document.getElementById('vortexContainer');
     if (!container) return;
 
     const items = ['📚', '📘', '📙', '✨', '🪐', '📖'];
-    const totalElements = 25; // Slightly reduced element volume to clear visual layout clutter
+    const totalElements = 30; 
 
     for (let i = 0; i < totalElements; i++) {
         const element = document.createElement('div');
         element.className = 'vortex-item';
         element.innerText = items[Math.floor(Math.random() * items.length)];
 
-        // Drastically increased execution timing variables (35s-65s) to cause slow drift speeds
-        const duration = 35 + Math.random() * 30; 
-        const delay = Math.random() * -60; 
-        const radius = 150 + Math.random() * 400; 
+        // Balanced Speed Engine (18s to 28s duration). Lively, but keeps focus clear.
+        const duration = 18 + Math.random() * 10; 
+        const delay = Math.random() * -30; 
+        const radius = 180 + Math.random() * 420; 
 
         element.style.setProperty('--orbit-radius', `${radius}px`);
         element.style.animationDuration = `${duration}s`;
