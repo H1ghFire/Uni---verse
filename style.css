@@ -1,9 +1,12 @@
 :root {
-    --bg-color: #0f172a;
+    --bg-color: #0b0f19;
+    --panel-bg: #1e293b;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --accent: #38bdf8;
-    --border-thick: 4px solid #ffffff; /* Thick lines matching your paint layout */
+    --border-thick: 4px solid #ffffff;
+    --border-thin: 1px solid #334155;
+    --success: #4ade80;
 }
 
 body {
@@ -14,15 +17,55 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* Header with Profile link aligned to the top-right corner */
+/* 🌀 Space Tornado Animation Canvas */
+.vortex-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    perspective: 1000px;
+}
+
+.vortex-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2.5rem;
+    user-select: none;
+    transform-style: preserve-3d;
+    opacity: 0;
+    animation: swirlVortex linear infinite;
+}
+
+@keyframes swirlVortex {
+    0% {
+        transform: translate3d(-50%, -50%, -600px) rotate(0deg) translateX(0px);
+        opacity: 0;
+    }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% {
+        transform: translate3d(-50%, -50%, 200px) rotate(1080deg) translateX(var(--orbit-radius)) rotateY(360deg);
+        opacity: 0;
+    }
+}
+
+/* Header Config */
 .main-header {
     width: 100%;
     padding: 1.5rem 2rem;
     box-sizing: border-box;
     display: flex;
     justify-content: flex-end;
+    position: relative;
+    z-index: 10;
 }
 
 #profileLink {
@@ -32,29 +75,28 @@ body {
     font-weight: 500;
     transition: color 0.2s;
 }
+#profileLink:hover { color: var(--accent); }
 
-#profileLink:hover {
-    color: var(--accent);
-}
-
-/* Centered Landing Container */
+/* Landing Home Screen Panel Layout */
 .welcome-container {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: 10vh; /* Keeps it perfectly balanced vertically */
+    padding-bottom: 10vh;
+    position: relative;
+    z-index: 10;
 }
 
-/* The prominent welcome box */
 .hero-box {
     border: var(--border-thick);
     padding: 3rem 6rem;
     text-align: center;
     margin-bottom: 1.5rem;
     max-width: 80%;
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(11, 15, 25, 0.8);
+    backdrop-filter: blur(4px);
 }
 
 .hero-box h1 {
@@ -64,23 +106,123 @@ body {
     letter-spacing: 0.05em;
 }
 
-/* Buttons Alignment */
-.btn-group {
-    display: flex;
-    gap: 1rem;
-}
+.btn-group { display: flex; gap: 1rem; }
 
 .action-btn {
-    background: transparent;
+    background: rgba(11, 15, 25, 0.9);
     color: var(--text-main);
     border: var(--border-thick);
     padding: 0.8rem 2.5rem;
     font-size: 1.1rem;
     cursor: pointer;
+    backdrop-filter: blur(4px);
     transition: background-color 0.2s, color 0.2s;
 }
-
 .action-btn:hover {
     background-color: var(--text-main);
     color: var(--bg-color);
 }
+
+/* 🖥️ Interactive App Dashboard Engine Layout */
+.dashboard-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem 1.5rem;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .dashboard-grid { grid-template-columns: 320px 1fr; }
+}
+
+.panel {
+    background-color: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(8px);
+    border: var(--border-thin);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.panel h2 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    border-bottom: var(--border-thin);
+    padding-bottom: 0.5rem;
+    color: var(--accent);
+}
+
+/* Input Styles */
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+.slider-header { display: flex; justify-content: space-between; }
+label { font-weight: 600; font-size: 0.85rem; color: var(--text-muted); }
+.value-display { font-weight: bold; color: var(--accent); font-size: 0.85rem; }
+
+select, input[type="range"] {
+    width: 100%;
+    background: #0f172a;
+    color: white;
+    border: var(--border-thin);
+    padding: 0.5rem;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.total-display-box {
+    background-color: #334155;
+    border-radius: 6px;
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px dashed var(--accent);
+    font-weight: bold;
+    color: var(--success);
+    font-size: 1.1rem;
+}
+
+/* Card Output Matrix */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+}
+
+.uni-card {
+    background-color: rgba(15, 23, 42, 0.6);
+    border: var(--border-thin);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: transform 0.2s, border-color 0.2s;
+}
+.uni-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.uni-name { font-size: 1.15rem; font-weight: bold; margin-bottom: 0.25rem; }
+.uni-country { color: var(--accent); font-size: 0.8rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;}
+
+.req-tag {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 0;
+    font-size: 0.85rem;
+    border-bottom: var(--border-thin);
+}
+.req-tag:last-child { border: none; }
+.req-val { font-weight: 600; }
+
+/* Visibility Control Utility */
+.hidden { display: none !important; }
