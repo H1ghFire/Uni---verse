@@ -1,10 +1,9 @@
 :root {
     --bg-color: #0f172a;
-    --card-bg: #1e293b;
-    --accent: #38bdf8;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    --total-box: #334155;
+    --accent: #38bdf8;
+    --border-thick: 4px solid #ffffff; /* Thick lines matching your paint layout */
 }
 
 body {
@@ -12,99 +11,76 @@ body {
     background-color: var(--bg-color);
     color: var(--text-main);
     margin: 0;
-    padding: 2rem;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-h1 { margin-bottom: 0.5rem; color: var(--accent); }
-p { color: var(--text-muted); margin: 0; }
-
-.search-panel {
-    background-color: var(--card-bg);
-    padding: 1.5rem;
-    border-radius: 12px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    border: 1px solid #334155;
-    align-items: end;
-}
-
-.filter-group {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
 }
 
-.total-display-box {
-    background-color: var(--total-box);
-    border-radius: 6px;
-    padding: 0.5rem;
-    text-align: center;
-    border: 1px dashed var(--accent);
-}
-
-label {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-select, input[type="range"] {
+/* Header with Profile link aligned to the top-right corner */
+.main-header {
     width: 100%;
-    background: #0f172a;
-    color: white;
-    border: 1px solid #475569;
-    padding: 0.5rem;
-    border-radius: 6px;
+    padding: 1.5rem 2rem;
     box-sizing: border-box;
-}
-
-.value-display {
-    font-weight: bold;
-    color: var(--accent);
-    text-align: right;
-    font-size: 0.85rem;
-}
-
-.results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-.uni-card {
-    background-color: var(--card-bg);
-    border: 1px solid #334155;
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: transform 0.2s, border-color 0.2s;
-}
-
-.uni-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
-}
-
-.uni-name { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; }
-.uni-country { color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;}
-
-.req-tag {
     display: flex;
-    justify-content: space-between;
-    padding: 0.35rem 0;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #334155;
+    justify-content: flex-end;
 }
-.req-tag:last-child { border: none; }
-.req-val { font-weight: 600; }
+
+#profileLink {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+#profileLink:hover {
+    color: var(--accent);
+}
+
+/* Centered Landing Container */
+.welcome-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10vh; /* Keeps it perfectly balanced vertically */
+}
+
+/* The prominent welcome box */
+.hero-box {
+    border: var(--border-thick);
+    padding: 3rem 6rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    max-width: 80%;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.hero-box h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+/* Buttons Alignment */
+.btn-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
+    background: transparent;
+    color: var(--text-main);
+    border: var(--border-thick);
+    padding: 0.8rem 2.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.action-btn:hover {
+    background-color: var(--text-main);
+    color: var(--bg-color);
+}
