@@ -12,23 +12,48 @@
     <!-- 🌌 Dynamic Space Tornado Background Layer -->
     <div id="vortexContainer" class="vortex-container"></div>
 
+    <!-- 🎫 CUSTOM MOCK LOGIN MODAL POPUP -->
+    <div id="loginModal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h2>Create Your Uni-verse Profile</h2>
+            <div class="modal-form">
+                <label for="usernameInput">Display Name / Nickname</label>
+                <input type="text" id="usernameInput" placeholder="e.g., StarStudent">
+                
+                <label>Select Your Cosmic Avatar</label>
+                <div class="avatar-selector">
+                    <span class="avatar-option selected" onclick="selectAvatar(this)">🚀</span>
+                    <span class="avatar-option" onclick="selectAvatar(this)">🪐</span>
+                    <span class="avatar-option" onclick="selectAvatar(this)">☄️</span>
+                    <span class="avatar-option" onclick="selectAvatar(this)">👾</span>
+                </div>
+
+                <button class="modal-submit-btn" onclick="submitMockLogin()">Launch Into Dashboard</button>
+                <button class="modal-close-btn" onclick="closeLoginModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Navigation Header -->
     <header class="main-header">
-        <div class="nav-right">
+        <div class="nav-left">
+            <button id="navHomeBtn" class="nav-brand-btn" onclick="showHomeScreen()">← Main Page</button>
+        </div>
+        <div class="nav-right" id="authNavContainer">
             <a href="#" id="profileLink" onclick="navigateToProfile()">Profile</a>
         </div>
     </header>
 
     <!-- 🪐 SCREEN 1: LANDING HOME SCREEN -->
     <div id="homeScreen" class="welcome-container">
-        <!-- Large Hero Welcome Box from your drawing -->
+        <!-- Large Hero Welcome Box -->
         <div class="hero-box">
             <h1>Welcome to the universe</h1>
         </div>
 
         <!-- Action Buttons Row -->
         <div class="btn-group">
-            <button class="action-btn" onclick="handleLogin()">Sign up / Login</button>
+            <button id="mainLoginBtn" class="action-btn" onclick="openLoginModal()">Sign up / Login</button>
             <button class="action-btn secondary" onclick="showAboutUs()">About us</button>
         </div>
     </div>
@@ -52,19 +77,13 @@
                 </div>
 
                 <div class="filter-group">
-                    <div class="slider-header">
-                        <label for="satEbrwFilter">SAT Reading & Writing</label>
-                        <span id="satEbrwVal" class="value-display">600</span>
-                    </div>
-                    <input type="range" id="satEbrwFilter" min="200" max="800" step="10" value="600" oninput="updateValues(); filterUniversities();">
+                    <label for="satEbrwFilter">SAT Reading & Writing</label>
+                    <input type="number" id="satEbrwFilter" min="200" max="800" step="10" value="600" oninput="updateValues(); filterUniversities();">
                 </div>
 
                 <div class="filter-group">
-                    <div class="slider-header">
-                        <label for="satMathFilter">SAT Math</label>
-                        <span id="satMathVal" class="value-display">600</span>
-                    </div>
-                    <input type="range" id="satMathFilter" min="200" max="800" step="10" value="600" oninput="updateValues(); filterUniversities();">
+                    <label for="satMathFilter">SAT Math</label>
+                    <input type="number" id="satMathFilter" min="200" max="800" step="10" value="600" oninput="updateValues(); filterUniversities();">
                 </div>
 
                 <div class="filter-group">
@@ -75,11 +94,8 @@
                 </div>
 
                 <div class="filter-group">
-                    <div class="slider-header">
-                        <label for="ieltsFilter">Your IELTS Band</label>
-                        <span id="ieltsVal" class="value-display">6.0</span>
-                    </div>
-                    <input type="range" id="ieltsFilter" min="4.0" max="9.0" step="0.5" value="6.0" oninput="updateValues(); filterUniversities();">
+                    <label for="ieltsFilter">Your IELTS Band</label>
+                    <input type="number" id="ieltsFilter" min="4.0" max="9.0" step="0.5" value="6.0" oninput="updateValues(); filterUniversities();">
                 </div>
             </section>
 
@@ -92,7 +108,7 @@
         </div>
     </div>
 
-    <!-- 🔗 Linking our separate JavaScript layers -->
+    <!-- 🔗 Restored our fast, standard layout scripting linkages -->
     <script src="auth.js"></script>
     <script src="script.js"></script>
 </body>
